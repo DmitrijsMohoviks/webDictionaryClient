@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="content">
+        <div class="w3-content">
+            <h:form id="signInForm" styleClass="w3-container w3-margin-top">
+                <h:panelGroup rendered="#{not currentUser.signedIn}">
+
+                    <label>E-mail</label><h:message for="email" errorClass="error-message"/>
+                    <h:inputText id="email" styleClass="w3-input w3-border"
+                                 value="#{signInForm.email}"
+                                 required="true"
+                                 requiredMessage="E-mail is required"/>
+
+                    <label>Password</label><h:message for="password" errorClass="error-message"/>
+                    <h:inputSecret id="password" styleClass="w3-input w3-border"
+                                   value="#{signInForm.password}"
+                                   redisplay="true"
+                                   required="true"
+                                   requiredMessage="Password is required"/>
+
+                    <div class="w3-margin-top w3-row">
+                        <div class="w3-col s12 m4 l4 w3-padding-small" style="padding-left:0!important">
+                            <h:commandButton styleClass="w3-btn w3-green" style="width: 100%"
+                                             value="Sign In"
+                                             action="#{signInForm.signIn}">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
+                        </div>
+                        <div class="w3-col w3-right s12 m4 l4 w3-padding-small" style="padding-right:0!important">
+                            <h:link styleClass="w3-btn w3-red w3-col s12 m4 l4" style="width: 100%"
+                                    value="Forgot password"
+                                    outcome="/reset.xhtml"/>
+                        </div>
+                    </div>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{currentUser.signedIn}">
+                    <div class="w3-panel w3-green w3-center w3-padding">
+                        <h3>Hello, <h:outputText value="#{currentUser.signedInUser.fullName}"/>!</h3>
+                        <p>You are successfully signed in.</p>
+                        <h:commandButton styleClass="w3-btn w3-black"
+                                         value="Sign out"
+                                         action="#{signInForm.signOut}">
+                        </h:commandButton>
+                    </div>
+                </h:panelGroup>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="content">
+        <div class="w3-content">
+            <h:form id="translationForm" styleClass="w3-container w3-margin-top">
+                <h:panelGroup rendered="#{currentUser.signedIn}">
+
+                    <label>Input a word for translation</label><h:message for="textInput" errorClass="error-message"/>
+                    <h:inputText id="textInput" styleClass="w3-input w3-border"
+                                 value="#{translationForm.input}"
+                                 required="true"
+                                 requiredMessage="Input is required"/>
+                    <f:metadata>
+                        <f:viewParam name="textInput" value="#{translationForm.input}"/>
+                        <f:viewAction action="#{translationForm.translate}"/>
+                    </f:metadata>
+
+
+                    <label>Translation</label>
+                    <div class="w3-display-container w3-white w3-border" style="height:100px;">
+                        <div class="w3-padding w3-display-topleft"><h:outputText
+                                value="#{translationForm.translation}"/></div>
+                    </div>
+
+                    <div class="w3-margin-top w3-row">
+                        <div class="w3-col s12 m4 l4 w3-padding-small" style="padding-left:0!important">
+                            <h:commandButton styleClass="w3-btn w3-green" style="width: 100%"
+                                             value="Translate"
+                                             action="#{translationForm.translate}">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                    <div class="w3-margin-top w3-row">
+                        <div class="w3-col s12 m4 l4 w3-padding-small" style="padding-left:0!important">
+                            <h:commandButton styleClass="w3-btn w3-blue" style="width: 100%"
+                                             value="ShowFavorites"
+                                             action="#{currentUser.showFavorites()}">
+                            </h:commandButton>
+                        </div>
+                    </div>
+                    <form>
+                        <ul class="w3-ul w3-hoverable">
+                            <ui:repeat value="#{currentUser.favorites}" var="item">
+                                <li><h:outputLink value="index.xhtml">#{item}
+                                    <f:param name="textInput" value="#{item}"/>
+                                </h:outputLink></li>
+                            </ui:repeat>
+                        </ul>
+                    </form>
+                </h:panelGroup>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>
