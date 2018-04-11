@@ -4,6 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+
 <ui:composition template="/WEB-INF/template.xhtml">
     <ui:define name="content">
         <div class="w3-content">
@@ -41,15 +42,36 @@
                             <h:commandButton styleClass="w3-btn w3-blue" style="width: 100%"
                                              value="ShowFavorites"
                                              action="#{currentUser.showFavorites()}">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
+                        </div>
+                        <div class="w3-col s12 m4 l4 w3-padding-small" style="padding-left:0!important">
+                            <h:commandButton styleClass="w3-btn w3-red" style="width: 100%"
+                                             value="Add to Favorites"
+                                             rendered="#{translationForm.translatedWords.length() > 0 }"
+                                             action="#{currentUser.addToFavorites()}">
+                                <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
                         </div>
                     </div>
                     <form>
                         <ul class="w3-ul w3-hoverable">
                             <ui:repeat value="#{currentUser.favorites}" var="item">
-                                <li><h:outputLink value="index.xhtml">#{item}
-                                    <f:param name="textInput" value="#{item}"/>
-                                </h:outputLink></li>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <th style="text-align: left">
+                                            <h:outputLink value="index.xhtml">#{item}
+                                                <f:param name="textInput" value="#{item}"/>
+                                            </h:outputLink>
+                                        </th>
+                                        <th style="text-align: right">
+                                            <h:commandButton class="fas fa-trash-alt fa-2x"
+                                                             action="#{currentUser.deleteFromFavorites(item)}">
+                                                <f:ajax execute="@form" render="@form"/>
+                                            </h:commandButton>
+                                        </th>
+                                    </tr>
+                                </table>
                             </ui:repeat>
                         </ul>
                     </form>

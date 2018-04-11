@@ -29,8 +29,8 @@ public class User implements Serializable {
     @Column(nullable = false)
     private boolean confirmed = false;
 
-    @OneToMany(mappedBy = "user")
-    private Collection<Favorites> favorites;
+    //@OneToMany(mappedBy = "user")
+    //private Collection<Favorites> favorites;
 
 
     public Long getId() {

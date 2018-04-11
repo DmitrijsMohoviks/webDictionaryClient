@@ -10,13 +10,10 @@ public class Favorites implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(insertable=false, updatable=false)
-    private Long user_id;
-    @Column
-    private String favorite;
-
     @ManyToOne
     private User user;
+    @Column
+    private String favorite;
 
     public Long getId() {
         return id;
@@ -26,12 +23,12 @@ public class Favorites implements Serializable {
         this.id = id;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getFavorite() {

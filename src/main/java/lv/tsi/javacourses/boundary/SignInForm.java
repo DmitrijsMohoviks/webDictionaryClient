@@ -51,6 +51,7 @@ public class SignInForm implements Serializable {
         try {
             request.logout();
             currentUser.setSignedInUser(null);
+            currentUser.setFavorites(null);
             return "/index.xhtml?faces-redirect=true";
         } catch (ServletException e) {
             logger.error("Sign out error", e);

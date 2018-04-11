@@ -14,10 +14,10 @@ import java.net.*;
 public class TranslationForm implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(TranslationForm.class);
 
-    public static final String SERVER = "dict.org";
-    public static final int PORT = 2628;
-    public static final int TIMEOUT = 15000;
-    private String[] words;
+    private static final String SERVER = "dict.org";
+    private static final int PORT = 2628;
+    private static final int TIMEOUT = 15000;
+    public static String[] words;
     private String input = "";
     private StringBuilder translatedWords = new StringBuilder();
     private String translation;
@@ -87,9 +87,9 @@ public class TranslationForm implements Serializable {
         return null;
     }
 
-    public String[] getWords() {
+    /* public String[] getWords() {
         return words;
-    }
+    } */
 
     public void setWords(String[] words) {
         this.words = words;
@@ -110,4 +110,14 @@ public class TranslationForm implements Serializable {
     public void setTranslation(String translation) {
         this.translation = translation;
     }
+
+    public StringBuilder getTranslatedWords() {
+        return translatedWords;
+    }
+
+    public void setTranslatedWords(StringBuilder translatedWords) {
+        this.translatedWords = translatedWords;
+    }
+
+
 }
