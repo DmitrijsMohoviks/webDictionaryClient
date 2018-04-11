@@ -42,7 +42,7 @@
                             <h:commandButton styleClass="w3-btn w3-blue" style="width: 100%"
                                              value="ShowFavorites"
                                              action="#{currentUser.showFavorites()}">
-                                <f:ajax execute="@form" render="@form"/>
+                                <f:ajax execute="" render="@form"/>
                             </h:commandButton>
                         </div>
                         <div class="w3-col s12 m4 l4 w3-padding-small" style="padding-left:0!important">
@@ -50,7 +50,7 @@
                                              value="Add to Favorites"
                                              rendered="#{translationForm.translatedWords.length() > 0 }"
                                              action="#{currentUser.addToFavorites()}">
-                                <f:ajax execute="@form" render="@form"/>
+                                <f:ajax execute="" render="@form"/>
                             </h:commandButton>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                                         <th style="text-align: right">
                                             <h:commandButton class="fas fa-trash-alt fa-2x"
                                                              action="#{currentUser.deleteFromFavorites(item)}">
-                                                <f:ajax execute="@form" render="@form"/>
+                                                <f:ajax execute="" render="@form"/>
                                             </h:commandButton>
                                         </th>
                                     </tr>
